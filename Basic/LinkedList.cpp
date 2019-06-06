@@ -1,10 +1,6 @@
 #include <iostream>
-
-//#include <stdio.h>
 // for malloc
 #include <stdlib.h>
-//for bool
-//#include <stdbool.h>
 using namespace std;
 struct node{
 	int data;
