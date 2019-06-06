@@ -1,19 +1,19 @@
 #include <iostream>
 
-#include <stdio.h>
+//#include <stdio.h>
 // for malloc
 #include <stdlib.h>
 //for bool
-#include <stdbool.h>
+//#include <stdbool.h>
 using namespace std;
 struct node{
 	int data;
 	struct node* next;
 };
 
-void addfirst(struct node** head_ref, int value){
-	struct node* first=*head_ref;
-	struct node* new_node=(struct node*)malloc(sizeof(struct node));
+void addfirst(node** head_ref, int value){
+	node* first=*head_ref;
+	node* new_node=(struct node*)malloc(sizeof(struct node));
 	new_node->data=value;
 	new_node->next=NULL;
 	if(*head_ref==NULL){
@@ -24,10 +24,10 @@ void addfirst(struct node** head_ref, int value){
 	}
 
 }
-void append(struct node** head_ref, int value){
+void append(node** head_ref, int value){
 
-	struct node* last=*head_ref;
-	struct node* new_node=(struct node*)malloc(sizeof(struct node));
+	node* last=*head_ref;
+	node* new_node=(struct node*)malloc(sizeof(struct node));
 	new_node->data=value;
 	new_node->next=NULL;
 	if(*head_ref==NULL){
@@ -43,7 +43,7 @@ void append(struct node** head_ref, int value){
 	
 	
 }
-void add_at_pos(struct node** head_ref, int value, int k){
+void add_at_pos(node** head_ref, int value, int k){
 	// This single function covers the add at beg and add at last also
 	int i=1;
 	struct node* temp=*head_ref;
@@ -75,7 +75,7 @@ void add_at_pos(struct node** head_ref, int value, int k){
 	}
 }
 
-void delete_from_beg(struct node** head_ref){
+void delete_from_beg(node** head_ref){
 	node* temp=*head_ref;
 	if(temp==NULL){
 		cout<<"Nothing to Delte\n";
@@ -91,9 +91,9 @@ void delete_from_beg(struct node** head_ref){
 	}
 }
 
-void deleteList(struct node** head_ref){
-	struct node* current=*head_ref;
-	struct node* prev=*head_ref;
+void deleteList(node** head_ref){
+	node* current=*head_ref;
+	node* prev=*head_ref;
 	if(*head_ref==NULL){
 		cout<<"Linked List is already Empty\n";
 	}
@@ -107,7 +107,7 @@ void deleteList(struct node** head_ref){
 
 	}
 	*head_ref=NULL;  // Imp here else *head_ref will point to some garbage value and al lother nodes will remain linked and filled with some garbage value 
-	
+
 }
 
 void display(struct node* Node){
@@ -124,8 +124,8 @@ void display(struct node* Node){
 }
 int main(){
 
-	std::cout<<"Create A linked list by entering the data at end\n";
-	struct node* head_ref=NULL;
+	cout<<"Create A linked list by entering the data at end\n";
+	node* head_ref=NULL;
 	
 	display(head_ref);
 	delete_from_beg(&head_ref);
