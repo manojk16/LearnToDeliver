@@ -20,97 +20,79 @@ Application:
 /* *************************Linked List Implementation******************************* */
 
 #include <iostream>
-#include <climits>
+#include <stdbool.h> 
 # define MAX_SIZE 10
 using namespace std;
 
 struct List_Stack{
-	int data;
-	struct List_Stack* next;
+	int top;
+	int capacity;
+	int *array;
+
 };
-List_Stack* top; 
 
-void push(int value){
-	// create a new node and allocated the memory
-	List_Stack* Node=(List_Stack*)malloc(sizeof(List_Stack));
-	// Check for the Overflow
-	if(!Node){
-		cout<<"Heap Overflow\n";
-
+List_Stack *create_stack(){
+	List_Stack* S=(List_Stack*)malloc(sizeof(List_Stack));
+	if(!S){
+		cout<<"Error in memory Allocation\n";
+		return NULL;
 	}
-	// Assign the data in to data part of the Node
-	
-	Node->data=value;
-	// put top pointer reference in to Node->next
-	Node->next=top;
-	// make Node as Top of the stack 
-	top=Node;
-
-}
-
-bool isEmpty(){
-	return(top==NULL);	
-}
-int pop(){
-	List_Stack* temp;
-	int value;
-	if(isEmpty()){
-		cout<<"UnderFlow\n";
-	}else{
-	temp=top;
-	top=top->next;
-	value=temp->data;
-	free(temp);
+	S->top=-1;
+	S->capacity=MAX_SIZE;
+	S->array=(int *)malloc(S->capacity * sizeof(int));
+	if(!S->array){
+		return NULL;
 	}
-	return value;
+	return S;
 }
-int peek(){
-	if(!isEmpty()){
-		return top->data;
+
+
+bool isEmpty(List_Stack* S){
+	return(S->top==-1); 
+}
+
+bool isFull{List_Stack* S}{
+	return (S->top==S->capacity-1);
+}
+void push(List_Stack* S, int data){
+	if(!isFull(S)){
+		S->top=S->top+1;
+		S->array[S->top]=data;
 	}else{
-		return (EXIT_FAILURE);
+		cout<<"OverFlow\n";
 	}
 }
 
-void display(){
-	List_Stack* temp;
-	if(top==NULL){
-		cout<<"Stack is Under Flow, ";
-		exit(1);
+
+int pop(List_Stack* S){
+	if(!isEmpty(S)){
+		int data=S->array[S->top]
+		S->top=S->top-1;
+		return data;
 	}else{
-		temp=top;
-		while(temp!=NULL){
-			cout<<temp->data<<"->";
-			temp=temp->next;
+		cout<<"UnderFlow\n"
+		return INT_MIN;
+	}
+}
+
+
+void delete_Link_stack(List_Stack* S){
+	if(S){
+		if(S->array){
+			free(S->array);
 		}
+		free(S);
 	}
-	cout<<"\n";
 }
+
 
 int main(){
-	//List_Stack* S=NULL;
-	push(11); 
-    push(22); 
-    push(33); 
-    push(44); 
-  	cout<<"\n";
-    // display stack elements 
-    display(); 
-  	cout<<"\n";
-    // print top elementof stack 
-    cout<<"Top element is:"<<peek()<<endl; 
-  	cout<<"\n";
-    // delete top elements of stack 
-    cout<<"Popped out Element is::" <<pop()<<endl; 
-    cout<<"\n";
-	cout<<"Popped out Element is::" <<pop()<<endl; 
-  	cout<<"\n";
-    // display stack elements 
-    cout <<"Remaining elements are ::\n";
-
-    display(); 
-  
-    // print top elementof stack 
-    cout<<"Top element is:"<<peek()<<endl; 
-    return 0;
+	List_Stack* S=NULL;
+	cout<<isEmpty(S)<<endl;
+	push(S,20);
+	push(S,10);
+	push(S,5);
+	cout<<"Popped Out Element is : "<<pop()<<endl;
+	cout<<"Popped Out Element is : "<<pop()<<endl;
+	cout<<isFull(S)<<endl;
 }
